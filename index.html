@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terra & Bloom — Wholesome Natural Skincare</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+/* ============================================
+   TERRA & BLOOM — SEASONAL THEME SYSTEM
+   ============================================ */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  /* DEFAULT / SAGE BASE (Spring) */
+  --primary: #7A8B6A;
+  --primary-light: #A3B18A;
+  --primary-lightest: #E8EDE3;
+  --primary-dark: #5A6B4E;
+  --primary-darkest: #3D4A35;
+  --accent-warm: #C4956A;
+  --accent-soft: #C4A0A0;
+  --accent-earth: #B5603A;
+  --bg-cream: #F5F0EB;
+  --bg-white: #FDFCFA;
+  --text-dark: #3A3A32;
+  --text-mid: #666;
+  --text-light: #888;
+  --border-light: #DAD7CD;
+  --hero-gradient-start: #A3B18A;
+  --hero-gradient-mid: #7A8B6A;
+  --hero-gradient-end: #5A6B4E;
+  --cta-gradient-start: #7A8B6A;
+  --cta-gradient-end: #A3B18A;
+  --badge-bg: #E8EDE3;
+  --badge-text: #5A6B4E;
+  --marquee-bg: #A3B18A;
+  --marquee-text: #3D4A35;
+  --footer-bg: #3A3A32;
+  --footer-text: #DAD7CD;
+  --footer-heading: #F5F0EB;
+
+  /* Product colors */
+  --product1-start: #E8EDE3;
+  --product1-end: #D0DABD;
+  --product2-start: #F5E6C8;
+  --product2-end: #E8D5A8;
+  --product3-start: #DAD7CD;
+  --product3-end: #C4A0A0;
+
+  /* Ingredient circles */
+  --ing1-start: #F5E6C8;
+  --ing1-end: #E8D5A8;
+  --ing2-start: #C4956A;
+  --ing2-end: #A67B50;
+  --ing3-start: #D4C98E;
+  --ing3-end: #B8AE6E;
+  --ing4-start: #A3B18A;
+  --ing4-end: #7A8B6A;
+
+  /* Transition */
+  --theme-transition: 0.6s ease;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-dark);
+  font-weight: 300;
+  background: var(--bg-cream);
+  transition: background var(--theme-transition);
+}
+
+.serif { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
+
+/* THEME PREVIEW BAR */
+.theme-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(58, 58, 50, 0.92);
+  backdrop-filter: blur(12px);
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 12px;
+  color: #DAD7CD;
+  letter-spacing: 0.5px;
+}
+.theme-bar label { opacity: 0.7; }
+.theme-bar select {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(218,215,205,0.25);
+  color: #F5F0EB;
+  padding: 5px 12px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  border-radius: 0;
+  cursor: pointer;
+}
+.theme-bar select option { background: #3A3A32; color: #F5F0EB; }
+.theme-bar .auto-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  background: rgba(163,177,138,0.3);
+  color: #A3B18A;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* NAV */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  padding-top: 60px; /* offset for theme bar */
+  background: var(--bg-cream);
+  transition: background var(--theme-transition);
+}
+.nav-links { display: flex; gap: 32px; font-size: 13px; letter-spacing: 1.2px; text-transform: uppercase; }
+.nav-links a { text-decoration: none; color: var(--text-dark); opacity: 0.7; transition: opacity 0.2s; }
+.nav-links a:hover { opacity: 1; }
+.logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 500; letter-spacing: 2px; color: var(--text-dark); }
+
+/* MARQUEE */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--marquee-bg);
+  padding: 10px 0;
+  transition: background var(--theme-transition);
+}
+.marquee-inner {
+  display: inline-block;
+  animation: marquee-scroll 25s linear infinite;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--marquee-text);
+  transition: color var(--theme-transition);
+}
+@keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 480px;
+  background: var(--bg-cream);
+  transition: background var(--theme-transition);
+}
+.hero-text {
+  padding: 72px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--primary-light);
+  margin-bottom: 16px;
+  transition: color var(--theme-transition);
+}
+.hero-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 46px;
+  line-height: 1.1;
+  font-weight: 400;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+  transition: color var(--theme-transition);
+}
+.hero-divider {
+  width: 48px;
+  height: 1px;
+  background: var(--primary-light);
+  margin: 0 0 24px;
+  transition: background var(--theme-transition);
+}
+.hero-body {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-mid);
+  max-width: 420px;
+  margin-bottom: 28px;
+}
+.hero-img {
+  background: linear-gradient(135deg, var(--hero-gradient-start) 0%, var(--hero-gradient-mid) 40%, var(--hero-gradient-end) 100%);
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+  transition: background var(--theme-transition);
+}
+.hero-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.1) 0%, transparent 50%);
+}
+.hero-img-label {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  z-index: 1;
+  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+/* BUTTONS */
+.btn {
+  display: inline-block;
+  padding: 14px 36px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.btn-primary {
+  background: var(--text-dark);
+  color: var(--bg-cream);
+}
+.btn-primary:hover { opacity: 0.85; }
+.btn-outline {
+  background: transparent;
+  color: var(--text-dark);
+  border: 1px solid var(--text-dark);
+}
+.btn-outline:hover { background: var(--text-dark); color: var(--bg-cream); }
+.btn-hero-cta {
+  background: var(--bg-cream);
+  color: var(--text-dark);
+  transition: background var(--theme-transition), color var(--theme-transition);
+}
+.btn-hero-cta:hover { opacity: 0.9; }
+
+/* SECTIONS */
+.section { padding: 72px 48px; transition: background var(--theme-transition); }
+.section-cream { background: var(--bg-cream); }
+.section-white { background: var(--bg-white); }
+.section-sage { background: var(--primary-lightest); }
+.section-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--primary-light);
+  margin-bottom: 8px;
+  transition: color var(--theme-transition);
+}
+.section-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+/* INGREDIENTS */
+.ingredients-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+.ing-circle {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  transition: background var(--theme-transition);
+}
+.ing-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: var(--text-dark); }
+.ing-detail { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
+/* PRODUCTS */
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 36px;
+}
+.products-link {
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--primary-light);
+  text-decoration: none;
+  transition: color var(--theme-transition);
+}
+.products-link:hover { opacity: 0.8; }
+.products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.product-card { text-align: center; }
+.product-img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--theme-transition);
+}
+.product-shape { opacity: 0.5; background: var(--bg-white); }
+.product-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; margin-bottom: 4px; color: var(--text-dark); }
+.product-desc { font-size: 13px; color: var(--text-light); margin-bottom: 6px; }
+.product-badges { margin: 6px 0 10px; }
+.badge {
+  display: inline-block;
+  padding: 3px 14px;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  font-size: 11px;
+  border-radius: 20px;
+  margin: 2px;
+  transition: background var(--theme-transition), color var(--theme-transition);
+}
+.product-price { font-size: 14px; font-weight: 400; color: var(--text-dark); }
+
+/* QUOTE */
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 26px;
+  text-align: center;
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.5;
+  color: var(--primary-dark);
+  transition: color var(--theme-transition);
+}
+.quote-author {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--primary);
+  transition: color var(--theme-transition);
+}
+
+/* TESTIMONIALS */
+.testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.testimonial {
+  padding: 28px;
+  border: 1px solid var(--border-light);
+  transition: border-color var(--theme-transition);
+}
+.testimonial p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+  margin-bottom: 12px;
+}
+.testimonial .author {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--primary-light);
+  transition: color var(--theme-transition);
+}
+
+/* CTA BANNER */
+.cta-banner {
+  background: linear-gradient(135deg, var(--cta-gradient-start) 0%, var(--cta-gradient-end) 100%);
+  padding: 64px 48px;
+  text-align: center;
+  transition: background var(--theme-transition);
+}
+.cta-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--bg-cream);
+  margin-bottom: 8px;
+}
+.cta-body {
+  font-size: 14px;
+  color: var(--primary-lightest);
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+
+/* FOOTER */
+.footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 48px;
+  transition: background var(--theme-transition);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px;
+  font-size: 13px;
+}
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--footer-heading);
+  margin-bottom: 12px;
+}
+.footer-tagline { font-size: 13px; line-height: 1.6; opacity: 0.6; max-width: 280px; }
+.footer-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: var(--footer-heading);
+}
+.footer-links { display: flex; flex-direction: column; gap: 6px; }
+.footer-links a { color: var(--footer-text); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+.footer-links a:hover { opacity: 1; }
+.footer-bottom {
+  border-top: 1px solid rgba(218,215,205,0.15);
+  margin-top: 32px;
+  padding-top: 20px;
+  font-size: 12px;
+  opacity: 0.4;
+}
+
+/* SEASONAL DECORATION (snowflakes, petals, leaves, etc.) */
+.seasonal-deco {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+.seasonal-deco .particle {
+  position: absolute;
+  top: -20px;
+  opacity: 0;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-img { min-height: 280px; }
+  .hero-text { padding: 40px 24px; }
+  .nav { padding: 16px 20px; padding-top: 56px; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .nav-links { gap: 16px; font-size: 11px; }
+  .section { padding: 48px 24px; }
+  .products-grid { grid-template-columns: 1fr; gap: 40px; }
+  .ingredients-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .hero-heading { font-size: 34px; }
+  .section-heading { font-size: 28px; }
+  .products-header { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- THEME PREVIEW BAR -->
+<div class="theme-bar">
+  <label>Theme:</label>
+  <select id="themeSelect" onchange="applyTheme(this.value)">
+    <option value="auto">Auto-detect</option>
+    <optgroup label="Seasons">
+      <option value="spring">Spring</option>
+      <option value="summer">Summer</option>
+      <option value="fall">Fall / Autumn</option>
+      <option value="winter">Winter</option>
+    </optgroup>
+    <optgroup label="Holidays">
+      <option value="valentines">Valentine's Day</option>
+      <option value="mothers-day">Mother's Day</option>
+      <option value="july4th">Fourth of July</option>
+      <option value="halloween">Halloween</option>
+      <option value="thanksgiving">Thanksgiving</option>
+      <option value="christmas">Christmas</option>
+      <option value="newyear">New Year</option>
+    </optgroup>
+  </select>
+  <span class="auto-badge" id="autoBadge">auto</span>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-links">
+    <a href="#">Shop</a>
+    <a href="#">Ingredients</a>
+    <a href="#">Our story</a>
+  </div>
+  <div class="logo">TERRA &amp; BLOOM</div>
+  <div class="nav-links">
+    <a href="#">Ritual guide</a>
+    <a href="#">Journal</a>
+    <a href="#"><i class="ti ti-shopping-bag" style="font-size:18px;"></i></a>
+  </div>
+</nav>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-inner" id="marqueeContent">
+    <span>Free shipping on orders over $50 &nbsp;&nbsp; · &nbsp;&nbsp; Small-batch · Ingredient-first · Cruelty-free &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping on orders over $50 &nbsp;&nbsp; · &nbsp;&nbsp; Small-batch · Ingredient-first · Cruelty-free &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping on orders over $50 &nbsp;&nbsp; · &nbsp;&nbsp; Small-batch · Ingredient-first · Cruelty-free &nbsp;&nbsp; · &nbsp;&nbsp;</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-label" id="heroLabel">Rooted in ritual</div>
+    <h1 class="hero-heading" id="heroHeading">Skincare that honors<br>what grows</h1>
+    <div class="hero-divider"></div>
+    <p class="hero-body" id="heroBody">Small-batch formulations made from wildcrafted botanicals, cold-pressed oils, and ingredients you can pronounce.</p>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <a href="#" class="btn btn-primary" id="heroCta1">Shop collection</a>
+      <a href="#" class="btn btn-outline" id="heroCta2">Our ingredients</a>
+    </div>
+  </div>
+  <div class="hero-img">
+    <div class="hero-img-label">
+      <i class="ti ti-leaf" style="font-size:16px; margin-right:4px;"></i>
+      <span id="heroImgLabel">Hero image — ingredient photography</span>
+    </div>
+  </div>
+</section>
+
+<!-- INGREDIENTS -->
+<section class="section section-cream" style="text-align:center;">
+  <div class="section-label" id="ingredientsLabel">What's inside</div>
+  <h2 class="section-heading" id="ingredientsHeading" style="margin-bottom:40px;">Every ingredient earns its place</h2>
+  <div class="ingredients-grid">
+    <div>
+      <div class="ing-circle" id="ing1" style="background: linear-gradient(135deg, var(--ing1-start), var(--ing1-end));"></div>
+      <div class="ing-name" id="ingName1">Chamomile</div>
+      <div class="ing-detail" id="ingDetail1">Calms + soothes</div>
+    </div>
+    <div>
+      <div class="ing-circle" id="ing2" style="background: linear-gradient(135deg, var(--ing2-start), var(--ing2-end));"></div>
+      <div class="ing-name" id="ingName2">Saffron</div>
+      <div class="ing-detail" id="ingDetail2">Brightens + evens</div>
+    </div>
+    <div>
+      <div class="ing-circle" id="ing3" style="background: linear-gradient(135deg, var(--ing3-start), var(--ing3-end));"></div>
+      <div class="ing-name" id="ingName3">Jojoba oil</div>
+      <div class="ing-detail" id="ingDetail3">Nourishes + protects</div>
+    </div>
+    <div>
+      <div class="ing-circle" id="ing4" style="background: linear-gradient(135deg, var(--ing4-start), var(--ing4-end));"></div>
+      <div class="ing-name" id="ingName4">Green tea</div>
+      <div class="ing-detail" id="ingDetail4">Antioxidant + repairs</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section section-white">
+  <div class="products-header">
+    <div>
+      <div class="section-label" id="productsLabel">The collection</div>
+      <h2 class="section-heading" id="productsHeading">Bestsellers</h2>
+    </div>
+    <a href="#" class="products-link">View all <i class="ti ti-arrow-right" style="font-size:14px;"></i></a>
+  </div>
+  <div class="products-grid">
+    <div class="product-card">
+      <div class="product-img" id="productImg1" style="background: linear-gradient(180deg, var(--product1-start) 0%, var(--product1-end) 100%);">
+        <div class="product-shape" style="width:60px;height:120px;border-radius:30px;"></div>
+      </div>
+      <div class="product-name" id="productName1">Chamomile calming serum</div>
+      <div class="product-desc" id="productDesc1">Soothing daily treatment</div>
+      <div class="product-badges" id="productBadges1"><span class="badge">Chamomile</span><span class="badge">Jojoba</span></div>
+      <div class="product-price" id="productPrice1">$38</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" id="productImg2" style="background: linear-gradient(180deg, var(--product2-start) 0%, var(--product2-end) 100%);">
+        <div class="product-shape" style="width:50px;height:100px;border-radius:4px;"></div>
+      </div>
+      <div class="product-name" id="productName2">Saffron glow oil</div>
+      <div class="product-desc" id="productDesc2">Brightening face oil</div>
+      <div class="product-badges" id="productBadges2"><span class="badge">Saffron</span><span class="badge">Rosehip</span></div>
+      <div class="product-price" id="productPrice2">$44</div>
+    </div>
+    <div class="product-card">
+      <div class="product-img" id="productImg3" style="background: linear-gradient(180deg, var(--product3-start) 0%, var(--product3-end) 100%);">
+        <div class="product-shape" style="width:70px;height:70px;border-radius:50%;"></div>
+      </div>
+      <div class="product-name" id="productName3">Rose clay mask</div>
+      <div class="product-desc" id="productDesc3">Deep cleansing ritual</div>
+      <div class="product-badges" id="productBadges3"><span class="badge">Rose clay</span><span class="badge">Green tea</span></div>
+      <div class="product-price" id="productPrice3">$32</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="section section-sage" style="padding: 80px 48px;">
+  <p class="quote-text" id="quoteText">"We believe skincare should be simple enough to understand and good enough to feel."</p>
+  <div class="quote-author" id="quoteAuthor">— The founders</div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section section-white" style="text-align:center;">
+  <div class="section-label">Kind words</div>
+  <h2 class="section-heading" style="margin-bottom:36px;">From our community</h2>
+  <div class="testimonials-grid" style="text-align:left;">
+    <div class="testimonial">
+      <p id="testimonial1">"My skin has never been this calm. The chamomile serum is the only thing I use morning and night now."</p>
+      <div class="author">Sarah M. — verified buyer</div>
+    </div>
+    <div class="testimonial">
+      <p id="testimonial2">"I love knowing every single ingredient. The saffron oil gives me this glow that people actually notice."</p>
+      <div class="author">Priya K. — verified buyer</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <h2 class="cta-heading" id="ctaHeading">Start your ritual</h2>
+  <p class="cta-body" id="ctaBody">Join 12,000+ people choosing ingredients they can trust.</p>
+  <a href="#" class="btn btn-hero-cta" id="ctaBtn">Shop the collection</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">TERRA &amp; BLOOM</div>
+      <p class="footer-tagline" id="footerTagline">Small-batch, ingredient-first skincare rooted in what the earth already knows.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Shop</div>
+      <div class="footer-links">
+        <a href="#">All products</a>
+        <a href="#">Serums</a>
+        <a href="#">Oils</a>
+        <a href="#">Masks</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Learn</div>
+      <div class="footer-links">
+        <a href="#">Our ingredients</a>
+        <a href="#">Ritual guide</a>
+        <a href="#">Journal</a>
+        <a href="#">FAQ</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Connect</div>
+      <div class="footer-links">
+        <a href="#">Instagram</a>
+        <a href="#">Pinterest</a>
+        <a href="#">Email us</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Terra & Bloom. All rights reserved.</div>
+</footer>
+
+<!-- SEASONAL DECORATION CONTAINER -->
+<div class="seasonal-deco" id="seasonalDeco"></div>
+
+<script>
+/* ============================================
+   THEME ENGINE
+   ============================================ */
+
+const themes = {
+
+  // ——— SEASONS ———
+
+  spring: {
+    vars: {
+      '--primary': '#7A8B6A', '--primary-light': '#A3B18A', '--primary-lightest': '#E8EDE3',
+      '--primary-dark': '#5A6B4E', '--primary-darkest': '#3D4A35',
+      '--accent-warm': '#C4956A', '--accent-soft': '#C4A0A0', '--accent-earth': '#B5603A',
+      '--bg-cream': '#F5F0EB', '--bg-white': '#FDFCFA',
+      '--text-dark': '#3A3A32', '--text-mid': '#666', '--text-light': '#888',
+      '--border-light': '#DAD7CD',
+      '--hero-gradient-start': '#A3B18A', '--hero-gradient-mid': '#7A8B6A', '--hero-gradient-end': '#5A6B4E',
+      '--cta-gradient-start': '#7A8B6A', '--cta-gradient-end': '#A3B18A',
+      '--badge-bg': '#E8EDE3', '--badge-text': '#5A6B4E',
+      '--marquee-bg': '#A3B18A', '--marquee-text': '#3D4A35',
+      '--footer-bg': '#3A3A32', '--footer-text': '#DAD7CD', '--footer-heading': '#F5F0EB',
+      '--product1-start': '#E8EDE3', '--product1-end': '#D0DABD',
+      '--product2-start': '#F5E6C8', '--product2-end': '#E8D5A8',
+      '--product3-start': '#DAD7CD', '--product3-end': '#C4A0A0',
+      '--ing1-start': '#F5E6C8', '--ing1-end': '#E8D5A8',
+      '--ing2-start': '#C4956A', '--ing2-end': '#A67B50',
+      '--ing3-start': '#D4C98E', '--ing3-end': '#B8AE6E',
+      '--ing4-start': '#A3B18A', '--ing4-end': '#7A8B6A',
+    },
+    content: {
+      heroLabel: 'Fresh beginnings',
+      heroHeading: 'Skincare that blooms<br>with the season',
+      heroBody: 'Spring-harvested botanicals at peak potency. Light, breathable formulations for skin ready to renew.',
+      heroCta1: 'Shop spring edit',
+      heroImgLabel: 'Hero image — spring wildflowers, dewy botanicals',
+      ingredientsHeading: 'Spring\'s freshest ingredients',
+      productsHeading: 'Spring favorites',
+      ingName1: 'Chamomile', ingDetail1: 'Calms + soothes',
+      ingName2: 'Dandelion', ingDetail2: 'Detoxifies + renews',
+      ingName3: 'Aloe vera', ingDetail3: 'Hydrates + heals',
+      ingName4: 'Calendula', ingDetail4: 'Repairs + softens',
+      productName1: 'Chamomile calming serum', productDesc1: 'Soothing daily treatment',
+      productName2: 'Spring renewal oil', productDesc2: 'Lightweight renewing blend',
+      productName3: 'Calendula recovery balm', productDesc3: 'Gentle overnight repair',
+      productBadges1: ['Chamomile', 'Jojoba'], productBadges2: ['Dandelion', 'Rosehip'], productBadges3: ['Calendula', 'Aloe'],
+      quoteText: '"Spring is the earth\'s way of saying it\'s time to start fresh — so is your skincare."',
+      ctaHeading: 'Refresh your ritual',
+      ctaBody: 'New season, lighter layers. Shop spring-ready formulations.',
+      marquee: 'Spring collection now live &nbsp;&nbsp; · &nbsp;&nbsp; Fresh-harvested botanicals &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping over $50 &nbsp;&nbsp; · &nbsp;&nbsp;',
+    },
+    particles: { type: 'petals', color: '#D4A0B0', count: 12 }
+  },
+
+  summer: {
+    vars: {
+      '--primary': '#D4A55A', '--primary-light': '#E8C97A', '--primary-lightest': '#FFF8EB',
+      '--primary-dark': '#B08840', '--primary-darkest': '#7A5E2A',
+      '--accent-warm': '#E8945A', '--accent-soft': '#F0C4A0', '--accent-earth': '#C46A3A',
+      '--bg-cream': '#FFFCF5', '--bg-white': '#FFFEFA',
+      '--text-dark': '#3A3428', '--text-mid': '#706850', '--text-light': '#998A6E',
+      '--border-light': '#E8DCC8',
+      '--hero-gradient-start': '#E8C97A', '--hero-gradient-mid': '#D4A55A', '--hero-gradient-end': '#C4863A',
+      '--cta-gradient-start': '#D4A55A', '--cta-gradient-end': '#E8C97A',
+      '--badge-bg': '#FFF3D8', '--badge-text': '#8A6E30',
+      '--marquee-bg': '#E8C97A', '--marquee-text': '#7A5E2A',
+      '--footer-bg': '#3A3428', '--footer-text': '#E8DCC8', '--footer-heading': '#FFFCF5',
+      '--product1-start': '#FFF3D8', '--product1-end': '#F5DFA8',
+      '--product2-start': '#FFE8C8', '--product2-end': '#F0C4A0',
+      '--product3-start': '#FFF0D0', '--product3-end': '#E8C878',
+      '--ing1-start': '#FFE0A0', '--ing1-end': '#F5C868',
+      '--ing2-start': '#F0A858', '--ing2-end': '#D88838',
+      '--ing3-start': '#C8D468', '--ing3-end': '#A8B848',
+      '--ing4-start': '#F5D088', '--ing4-end': '#E8B858',
+    },
+    content: {
+      heroLabel: 'Sun-kissed ritual',
+      heroHeading: 'Glow through<br>every golden hour',
+      heroBody: 'Lightweight, protective formulations built for warm days. Citrus-infused hydration that moves with your skin.',
+      heroCta1: 'Shop summer glow',
+      heroImgLabel: 'Hero image — citrus, golden light, sun-drenched botanicals',
+      ingredientsHeading: 'Summer\'s star ingredients',
+      productsHeading: 'Summer essentials',
+      ingName1: 'Citrus peel', ingDetail1: 'Brightens + energizes',
+      ingName2: 'Sea buckthorn', ingDetail2: 'Protects + repairs',
+      ingName3: 'Cucumber', ingDetail3: 'Cools + hydrates',
+      ingName4: 'Turmeric', ingDetail4: 'Evens + glows',
+      productName1: 'Citrus radiance mist', productDesc1: 'Refreshing hydration spray',
+      productName2: 'Golden hour glow oil', productDesc2: 'Sun-protective face oil',
+      productName3: 'After-sun soothing gel', productDesc3: 'Cooling recovery treatment',
+      productBadges1: ['Citrus', 'Cucumber'], productBadges2: ['Turmeric', 'Sea buckthorn'], productBadges3: ['Aloe', 'Chamomile'],
+      quoteText: '"Your skin deserves the same warmth you give to everything you love this summer."',
+      ctaHeading: 'Glow all season',
+      ctaBody: 'Sun-ready skincare that protects and radiates.',
+      marquee: 'Summer collection is here &nbsp;&nbsp; · &nbsp;&nbsp; SPF-friendly layering &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping over $50 &nbsp;&nbsp; · &nbsp;&nbsp;',
+    },
+    particles: { type: 'sparkles', color: '#E8C97A', count: 8 }
+  },
+
+  fall: {
+    vars: {
+      '--primary': '#A0704A', '--primary-light': '#C49468', '--primary-lightest': '#F5EBE0',
+      '--primary-dark': '#7A5434', '--primary-darkest': '#4A3220',
+      '--accent-warm': '#C4603A', '--accent-soft': '#D4A070', '--accent-earth': '#8B4A2A',
+      '--bg-cream': '#FAF4EB', '--bg-white': '#FFFBF5',
+      '--text-dark': '#3A2E24', '--text-mid': '#6A5840', '--text-light': '#8A7860',
+      '--border-light': '#E0D0BC',
+      '--hero-gradient-start': '#C49468', '--hero-gradient-mid': '#A07048', '--hero-gradient-end': '#7A5434',
+      '--cta-gradient-start': '#A0704A', '--cta-gradient-end': '#C49468',
+      '--badge-bg': '#F5EBE0', '--badge-text': '#7A5434',
+      '--marquee-bg': '#C49468', '--marquee-text': '#4A3220',
+      '--footer-bg': '#3A2E24', '--footer-text': '#E0D0BC', '--footer-heading': '#FAF4EB',
+      '--product1-start': '#F5EBE0', '--product1-end': '#E0CCAA',
+      '--product2-start': '#F0D8B8', '--product2-end': '#D4A870',
+      '--product3-start': '#EAD0B0', '--product3-end': '#C49060',
+      '--ing1-start': '#E8C088', '--ing1-end': '#D0A060',
+      '--ing2-start': '#C46838', '--ing2-end': '#A45028',
+      '--ing3-start': '#D4A050', '--ing3-end': '#B88838',
+      '--ing4-start': '#8A7048', '--ing4-end': '#6A5030',
+    },
+    content: {
+      heroLabel: 'Harvest season',
+      heroHeading: 'Deeper nourishment<br>for changing skin',
+      heroBody: 'Rich, protective formulations for the transition. Warming spices and harvest-season oils that cocoon your skin.',
+      heroCta1: 'Shop fall harvest',
+      heroImgLabel: 'Hero image — warm spices, amber light, dried botanicals',
+      ingredientsHeading: 'Autumn\'s richest ingredients',
+      productsHeading: 'Fall essentials',
+      ingName1: 'Pumpkin enzyme', ingDetail1: 'Exfoliates + renews',
+      ingName2: 'Cinnamon bark', ingDetail2: 'Warms + stimulates',
+      ingName3: 'Sweet almond', ingDetail3: 'Deeply nourishes',
+      ingName4: 'Oat extract', ingDetail4: 'Soothes + barriers',
+      productName1: 'Pumpkin enzyme peel', productDesc1: 'Gentle weekly exfoliant',
+      productName2: 'Harvest nourishing oil', productDesc2: 'Deep moisture blend',
+      productName3: 'Oat barrier cream', productDesc3: 'Protective daily shield',
+      productBadges1: ['Pumpkin', 'Honey'], productBadges2: ['Almond', 'Cinnamon'], productBadges3: ['Oat', 'Shea'],
+      quoteText: '"As the leaves let go, your skin is ready to hold on to something richer."',
+      ctaHeading: 'Nourish the transition',
+      ctaBody: 'Richer textures for skin that craves warmth.',
+      marquee: 'Fall harvest collection &nbsp;&nbsp; · &nbsp;&nbsp; Warming botanicals &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping over $50 &nbsp;&nbsp; · &nbsp;&nbsp;',
+    },
+    particles: { type: 'leaves', color: '#C47040', count: 10 }
+  },
+
+  winter: {
+    vars: {
+      '--primary': '#7A8A9A', '--primary-light': '#A0B0C0', '--primary-lightest': '#EEF2F6',
+      '--primary-dark': '#5A6A7A', '--primary-darkest': '#3A4A5A',
+      '--accent-warm': '#C4A888', '--accent-soft': '#B0A090', '--accent-earth': '#8A7A6A',
+      '--bg-cream': '#F5F5F2', '--bg-white': '#FCFCFA',
+      '--text-dark': '#2E3238', '--text-mid': '#5A6068', '--text-light': '#8A8E94',
+      '--border-light': '#DDE0E4',
+      '--hero-gradient-start': '#A0B0C0', '--hero-gradient-mid': '#7A8A9A', '--hero-gradient-end': '#5A6A7A',
+      '--cta-gradient-start': '#7A8A9A', '--cta-gradient-end': '#A0B0C0',
+      '--badge-bg': '#EEF2F6', '--badge-text': '#5A6A7A',
+      '--marquee-bg': '#A0B0C0', '--marquee-text': '#3A4A5A',
+      '--footer-bg': '#2E3238', '--footer-text': '#C0C4C8', '--footer-heading': '#F5F5F2',
+      '--product1-start': '#EEF2F6', '--product1-end': '#D8DFE6',
+      '--product2-start': '#F0EAE0', '--product2-end': '#DDD0C0',
+      '--product3-start': '#E8E4E0', '--product3-end': '#D0C8BE',
+      '--ing1-start': '#E0D8CC', '--ing1-end': '#C8BAA8',
+      '--ing2-start': '#D0C4B4', '--ing2-end': '#B8A898',
+      '--ing3-start': '#C8D0D8', '--ing3-end': '#A8B4C0',
+      '--ing4-start': '#E0D0C0', '--ing4-end': '#C8B8A0',
+    },
+    content: {
+      heroLabel: 'Winter sanctuary',
+      heroHeading: 'Shelter your skin<br>through the stillness',
+      heroBody: 'Ultra-rich, barrier-building formulations for the harshest months. Deeply hydrating oils and butters that lock in warmth.',
+      heroCta1: 'Shop winter care',
+      heroImgLabel: 'Hero image — frost textures, warm interiors, rich creams',
+      ingredientsHeading: 'Winter\'s protective ingredients',
+      productsHeading: 'Winter protectors',
+      ingName1: 'Shea butter', ingDetail1: 'Deeply moisturizes',
+      ingName2: 'Rosehip', ingDetail2: 'Repairs + restores',
+      ingName3: 'Honey', ingDetail3: 'Seals + heals',
+      ingName4: 'Argan oil', ingDetail4: 'Shields + softens',
+      productName1: 'Shea intensive balm', productDesc1: 'Ultra-rich moisture lock',
+      productName2: 'Rosehip repair serum', productDesc2: 'Overnight restoration',
+      productName3: 'Honey barrier mask', productDesc3: 'Weekly deep treatment',
+      productBadges1: ['Shea', 'Argan'], productBadges2: ['Rosehip', 'Vitamin E'], productBadges3: ['Honey', 'Oat'],
+      quoteText: '"In the quietest months, your skin speaks the loudest. Listen and nourish."',
+      ctaHeading: 'Protect what matters',
+      ctaBody: 'Build your winter barrier. Rich, restorative skincare for cold days.',
+      marquee: 'Winter care collection &nbsp;&nbsp; · &nbsp;&nbsp; Barrier-building rituals &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping over $50 &nbsp;&nbsp; · &nbsp;&nbsp;',
+    },
+    particles: { type: 'snow', color: '#C8D0D8', count: 20 }
+  },
+
+  // ——— HOLIDAYS ———
+
+  valentines: {
+    vars: {
+      '--primary': '#C4647A', '--primary-light': '#E0909A', '--primary-lightest': '#FDE8EC',
+      '--primary-dark': '#9A4A58', '--primary-darkest': '#6A2A38',
+      '--accent-warm': '#D4908A', '--accent-soft': '#E8B8B4', '--accent-earth': '#A05050',
+      '--bg-cream': '#FFF5F5', '--bg-white': '#FFFAFA',
+      '--text-dark': '#3A2028', '--text-mid': '#7A5060', '--text-light': '#A08088',
+      '--border-light': '#F0D0D4',
+      '--hero-gradient-start': '#E0909A', '--hero-gradient-mid': '#C4647A', '--hero-gradient-end': '#9A4A58',
+      '--cta-gradient-start': '#C4647A', '--cta-gradient-end': '#E0909A',
+      '--badge-bg': '#FDE8EC', '--badge-text': '#9A4A58',
+      '--marquee-bg': '#E0909A', '--marquee-text': '#6A2A38',
+      '--footer-bg': '#3A2028', '--footer-text': '#E8C0C8', '--footer-heading': '#FFF5F5',
+      '--product1-start': '#FDE8EC', '--product1-end': '#F0C8D0',
+      '--product2-start': '#FFE0E0', '--product2-end': '#F0B0B0',
+      '--product3-start': '#F8E0E4', '--product3-end': '#E8B8B8',
+      '--ing1-start': '#F5C0C8', '--ing1-end': '#E0A0A8',
+      '--ing2-start': '#E89098', '--ing2-end': '#D07078',
+      '--ing3-start': '#F0D0C8', '--ing3-end': '#E0B0A0',
+      '--ing4-start': '#D0707A', '--ing4-end': '#B85060',
+    },
+    content: {
+      heroLabel: 'With love',
+      heroHeading: 'The gift of<br>glowing skin',
+      heroBody: 'Curated sets wrapped in love. Rose-infused, petal-soft formulations for the one who deserves tenderness.',
+      heroCta1: 'Shop Valentine\'s gifts',
+      heroCta2: 'Build a gift set',
+      heroImgLabel: 'Hero image — rose petals, soft pink, gift wrapping',
+      ingredientsHeading: 'Made with love',
+      productsHeading: 'Valentine\'s collection',
+      ingName1: 'Rose extract', ingDetail1: 'Softens + tones',
+      ingName2: 'Hibiscus', ingDetail2: 'Firms + plumps',
+      ingName3: 'Peony', ingDetail3: 'Calms + brightens',
+      ingName4: 'Strawberry seed', ingDetail4: 'Antioxidant + glow',
+      productName1: 'Rose petal face mist', productDesc1: 'Romantic hydration ritual',
+      productName2: 'Sweetheart glow duo', productDesc2: 'Serum + oil gift set',
+      productName3: 'Petal soft lip balm', productDesc3: 'Tinted botanical balm',
+      productBadges1: ['Rose', 'Glycerin'], productBadges2: ['Hibiscus', 'Rosehip'], productBadges3: ['Peony', 'Beeswax'],
+      quoteText: '"Love your skin the way you love the people in your life — gently, fully, and often."',
+      ctaHeading: 'Give the gift of glow',
+      ctaBody: 'Limited edition Valentine\'s sets. Wrapped and ready.',
+      marquee: 'Valentine\'s collection &nbsp;&nbsp; · &nbsp;&nbsp; Gift wrapping available &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping over $50 &nbsp;&nbsp; · &nbsp;&nbsp;',
+    },
+    particles: { type: 'hearts', color: '#E0909A', count: 10 }
+  },
+
+  'mothers-day': {
+    vars: {
+      '--primary': '#9A7AB0', '--primary-light': '#BEA0D0', '--primary-lightest': '#F0E8F5',
+      '--primary-dark': '#7A5A90', '--primary-darkest': '#4A2A5A',
+      '--accent-warm': '#D4A0C0', '--accent-soft': '#E0C0D8', '--accent-earth': '#8A5A80',
+      '--bg-cream': '#FBF5FF', '--bg-white': '#FEFCFF',
+      '--text-dark': '#302030', '--text-mid': '#604A68', '--text-light': '#907898',
+      '--border-light': '#E0D0E8',
+      '--hero-gradient-start': '#BEA0D0', '--hero-gradient-mid': '#9A7AB0', '--hero-gradient-end': '#7A5A90',
+      '--cta-gradient-start': '#9A7AB0', '--cta-gradient-end': '#BEA0D0',
+      '--badge-bg': '#F0E8F5', '--badge-text': '#7A5A90',
+      '--marquee-bg': '#BEA0D0', '--marquee-text': '#4A2A5A',
+      '--footer-bg': '#302030', '--footer-text': '#D0C0D8', '--footer-heading': '#FBF5FF',
+      '--product1-start': '#F0E8F5', '--product1-end': '#DCC8E8',
+      '--product2-start': '#F5E0F0', '--product2-end': '#E0B8D8',
+      '--product3-start': '#EAE0F0', '--product3-end': '#D0B8E0',
+      '--ing1-start': '#E0C8E8', '--ing1-end': '#C8A8D0',
+      '--ing2-start': '#D0A0C0', '--ing2-end': '#B880A8',
+      '--ing3-start': '#E8D0E0', '--ing3-end': '#D0B0C8',
+      '--ing4-start': '#B898C8', '--ing4-end': '#9878A8',
+    },
+    content: {
+      heroLabel: 'For her',
+      heroHeading: 'She gave you<br>everything — give back',
+      heroBody: 'Thoughtfully curated skincare bundles for the woman who puts everyone first. Lavender-infused calm she actually deserves.',
+      heroCta1: 'Shop Mother\'s Day',
+      heroCta2: 'Build her bundle',
+      heroImgLabel: 'Hero image — lavender, soft wrapping, maternal warmth',
+      ingredientsHeading: 'Chosen with care',
+      productsHeading: 'Mother\'s Day gifts',
+      ingName1: 'Lavender', ingDetail1: 'Calms + restores',
+      ingName2: 'Neroli', ingDetail2: 'Regenerates + soothes',
+      ingName3: 'Jasmine', ingDetail3: 'Tones + uplifts',
+      ingName4: 'Violet leaf', ingDetail4: 'Hydrates + softens',
+      productName1: 'Lavender calm set', productDesc1: 'Complete relaxation ritual',
+      productName2: 'Neroli radiance duo', productDesc2: 'Serum + moisturizer pairing',
+      productName3: 'Jasmine body oil', productDesc3: 'Full-body luxury treatment',
+      productBadges1: ['Lavender', 'Chamomile'], productBadges2: ['Neroli', 'Vitamin C'], productBadges3: ['Jasmine', 'Jojoba'],
+      quoteText: '"The best gift isn\'t the most expensive one — it\'s the one that says \'I see you.\'"',
+      ctaHeading: 'Make her feel seen',
+      ctaBody: 'Mother\'s Day bundles with complimentary gift wrapping.',
+      marquee: 'Mother\'s Day gifts &nbsp;&nbsp; · &nbsp;&nbsp; Complimentary wrapping &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping over $50 &nbsp;&nbsp; · &nbsp;&nbsp;',
+    },
+    particles: { type: 'petals', color: '#BEA0D0', count: 10 }
+  },
+
+  july4th: {
+    vars: {
+      '--primary': '#4A6A8A', '--primary-light': '#7A9AB8', '--primary-lightest': '#E8F0F8',
+      '--primary-dark': '#3A5068', '--primary-darkest': '#2A3848',
+      '--accent-warm': '#C45040', '--accent-soft': '#E8A898', '--accent-earth': '#8A3828',
+      '--bg-cream': '#F8F5F0', '--bg-white': '#FDFCFA',
+      '--text-dark': '#2A2830', '--text-mid': '#5A5868', '--text-light': '#8A8898',
+      '--border-light': '#D8D4D0',
+      '--hero-gradient-start': '#7A9AB8', '--hero-gradient-mid': '#4A6A8A', '--hero-gradient-end': '#3A5068',
+      '--cta-gradient-start': '#4A6A8A', '--cta-gradient-end': '#7A9AB8',
+      '--badge-bg': '#E8F0F8', '--badge-text': '#3A5068',
+      '--marquee-bg': '#C45040', '--marquee-text': '#FFF',
+      '--footer-bg': '#2A2830', '--footer-text': '#C0C4C8', '--footer-heading': '#F8F5F0',
+      '--product1-start': '#E8F0F8', '--product1-end': '#C8D8E8',
+      '--product2-start': '#FDE8E4', '--product2-end': '#F0C0B8',
+      '--product3-start': '#F0EDE8', '--product3-end': '#DAD4CC',
+      '--ing1-start': '#C8D8E8', '--ing1-end': '#A0B8D0',
+      '--ing2-start': '#E0A0A0', '--ing2-end': '#C88080',
+      '--ing3-start': '#E0D8CC', '--ing3-end': '#C8BAA8',
+      '--ing4-start': '#90B0C8', '--ing4-end': '#7090A8',
+    },
+    content: {
+      heroLabel: 'Summer celebration',
+      heroHeading: 'Red, white<br>& radiant',
+      heroBody: 'Limited edition summer collection. Hydrating, sun-ready formulations for every outdoor celebration.',
+      heroCta1: 'Shop the edit',
+      heroImgLabel: 'Hero image — outdoor celebration, summer light, americana',
+      ingredientsHeading: 'Summer celebration ingredients',
+      productsHeading: 'Fourth of July edit',
+      ingName1: 'Watermelon', ingDetail1: 'Hydrates + cools',
+      ingName2: 'Tomato lycopene', ingDetail2: 'Protects + repairs',
+      ingName3: 'Coconut', ingDetail3: 'Moisturizes + shields',
+      ingName4: 'Blueberry', ingDetail4: 'Antioxidant + firms',
+      productName1: 'Watermelon hydra-mist', productDesc1: 'Cooling summer spray',
+      productName2: 'Berry antioxidant serum', productDesc2: 'Post-sun protection',
+      productName3: 'Coconut glow body oil', productDesc3: 'All-over summer shimmer',
+      productBadges1: ['Watermelon', 'Aloe'], productBadges2: ['Blueberry', 'Vitamin E'], productBadges3: ['Coconut', 'Jojoba'],
+      quoteText: '"Celebrate freely. Your skincare\'s got you covered."',
+      ctaHeading: 'Celebrate your glow',
+      ctaBody: 'Limited edition summer sets — while they last.',
+      marquee: '4th of July sale — 20% off sitewide &nbsp;&nbsp; · &nbsp;&nbsp; Limited edition sets &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping &nbsp;&nbsp; · &nbsp;&nbsp;',
+    },
+    particles: { type: 'sparkles', color: '#C45040', count: 12 }
+  },
+
+  halloween: {
+    vars: {
+      '--primary': '#8A6A30', '--primary-light': '#C49840', '--primary-lightest': '#FFF4E0',
+      '--primary-dark': '#6A4A20', '--primary-darkest': '#3A2A10',
+      '--accent-warm': '#E07820', '--accent-soft': '#D4A868', '--accent-earth': '#6A3A18',
+      '--bg-cream': '#FAF0E0', '--bg-white': '#FFFBF0',
+      '--text-dark': '#2A2018', '--text-mid': '#5A4830', '--text-light': '#8A7858',
+      '--border-light': '#E0D0B0',
+      '--hero-gradient-start': '#C49840', '--hero-gradient-mid': '#8A6A30', '--hero-gradient-end': '#5A4020',
+      '--cta-gradient-start': '#8A6A30', '--cta-gradient-end': '#C49840',
+      '--badge-bg': '#FFF4E0', '--badge-text': '#6A4A20',
+      '--marquee-bg': '#E07820', '--marquee-text': '#FFF4E0',
+      '--footer-bg': '#2A2018', '--footer-text': '#D0C0A0', '--footer-heading': '#FAF0E0',
+      '--product1-start': '#FFF4E0', '--product1-end': '#F0D8A0',
+      '--product2-start': '#FFE8C0', '--product2-end': '#E0B868',
+      '--product3-start': '#F5E0C0', '--product3-end': '#D0A860',
+      '--ing1-start': '#F0C868', '--ing1-end': '#D0A040',
+      '--ing2-start': '#E08828', '--ing2-end': '#C06818',
+      '--ing3-start': '#D0A850', '--ing3-end': '#B08830',
+      '--ing4-start': '#A08040', '--ing4-end': '#806028',
+    },
+    content: {
+      heroLabel: 'Trick or treat yourself',
+      heroHeading: 'Skin so good<br>it\'s scary',
+      heroBody: 'Pumpkin enzyme peels, charcoal detox masks, and spiced warming treatments. Indulge in the season\'s best.',
+      heroCta1: 'Shop spooky season',
+      heroImgLabel: 'Hero image — pumpkins, candlelight, autumn moody',
+      ingredientsHeading: 'Spooky season specials',
+      productsHeading: 'Halloween treats',
+      ingName1: 'Pumpkin enzyme', ingDetail1: 'Exfoliates + brightens',
+      ingName2: 'Charcoal', ingDetail2: 'Detoxifies + purifies',
+      ingName3: 'Black honey', ingDetail3: 'Deeply nourishes',
+      ingName4: 'Clove', ingDetail4: 'Stimulates + warms',
+      productName1: 'Pumpkin enzyme peel', productDesc1: 'Spiced exfoliant ritual',
+      productName2: 'Charcoal detox mask', productDesc2: 'Deep purifying treatment',
+      productName3: 'Black honey balm', productDesc3: 'Nourishing overnight mask',
+      productBadges1: ['Pumpkin', 'Cinnamon'], productBadges2: ['Charcoal', 'Tea tree'], productBadges3: ['Honey', 'Clove'],
+      quoteText: '"The scariest thing? Not knowing what\'s in your skincare."',
+      ctaHeading: 'Treat yourself',
+      ctaBody: 'Limited edition Halloween collection. No tricks, just treats.',
+      marquee: 'Halloween treats — limited edition &nbsp;&nbsp; · &nbsp;&nbsp; Pumpkin spice for your face &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping over $50 &nbsp;&nbsp; · &nbsp;&nbsp;',
+    },
+    particles: { type: 'sparkles', color: '#E07820', count: 8 }
+  },
+
+  thanksgiving: {
+    vars: {
+      '--primary': '#8A6040', '--primary-light': '#B88858', '--primary-lightest': '#F5EAD8',
+      '--primary-dark': '#6A4830', '--primary-darkest': '#402818',
+      '--accent-warm': '#C47030', '--accent-soft': '#D4A878', '--accent-earth': '#7A4020',
+      '--bg-cream': '#FAF2E4', '--bg-white': '#FFFBF2',
+      '--text-dark': '#302418', '--text-mid': '#604830', '--text-light': '#907050',
+      '--border-light': '#E0D0B4',
+      '--hero-gradient-start': '#B88858', '--hero-gradient-mid': '#8A6040', '--hero-gradient-end': '#6A4830',
+      '--cta-gradient-start': '#8A6040', '--cta-gradient-end': '#B88858',
+      '--badge-bg': '#F5EAD8', '--badge-text': '#6A4830',
+      '--marquee-bg': '#B88858', '--marquee-text': '#402818',
+      '--footer-bg': '#302418', '--footer-text': '#D0C0A8', '--footer-heading': '#FAF2E4',
+      '--product1-start': '#F5EAD8', '--product1-end': '#E0CCA8',
+      '--product2-start': '#F0D8B0', '--product2-end': '#D4B078',
+      '--product3-start': '#EAD4B8', '--product3-end': '#C8A878',
+      '--ing1-start': '#E0C088', '--ing1-end': '#C8A060',
+      '--ing2-start': '#C47838', '--ing2-end': '#A45820',
+      '--ing3-start': '#D0A458', '--ing3-end': '#B08438',
+      '--ing4-start': '#907050', '--ing4-end': '#705030',
+    },
+    content: {
+      heroLabel: 'Grateful skin',
+      heroHeading: 'Give thanks<br>to your skin',
+      heroBody: 'Harvest-inspired gratitude bundles. Rich, nourishing formulations from the season\'s most generous ingredients.',
+      heroCta1: 'Shop gratitude sets',
+      heroImgLabel: 'Hero image — harvest table, warm tones, gathering',
+      ingredientsHeading: 'Harvest\'s finest',
+      productsHeading: 'Gratitude collection',
+      ingName1: 'Maple extract', ingDetail1: 'Hydrates + smooths',
+      ingName2: 'Cranberry seed', ingDetail2: 'Antioxidant + firms',
+      ingName3: 'Pecan oil', ingDetail3: 'Nourishes + repairs',
+      ingName4: 'Apple cider', ingDetail4: 'Tones + balances',
+      productName1: 'Harvest glow set', productDesc1: 'Complete autumn ritual',
+      productName2: 'Cranberry brightening serum', productDesc2: 'Antioxidant treatment',
+      productName3: 'Spiced body butter', productDesc3: 'Deeply nourishing cream',
+      productBadges1: ['Maple', 'Honey'], productBadges2: ['Cranberry', 'Vitamin C'], productBadges3: ['Pecan', 'Cinnamon'],
+      quoteText: '"Gratitude starts with how you treat yourself — skin included."',
+      ctaHeading: 'Share the glow',
+      ctaBody: 'Thanksgiving bundles for gifting and self-care.',
+      marquee: 'Thanksgiving gratitude sets &nbsp;&nbsp; · &nbsp;&nbsp; Buy one, gift one &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping over $50 &nbsp;&nbsp; · &nbsp;&nbsp;',
+    },
+    particles: { type: 'leaves', color: '#B88858', count: 10 }
+  },
+
+  christmas: {
+    vars: {
+      '--primary': '#5A7A5A', '--primary-light': '#7AA07A', '--primary-lightest': '#E4F0E4',
+      '--primary-dark': '#3A5A3A', '--primary-darkest': '#203820',
+      '--accent-warm': '#B84040', '--accent-soft': '#D09898', '--accent-earth': '#8A2828',
+      '--bg-cream': '#FAF8F2', '--bg-white': '#FFFEFA',
+      '--text-dark': '#202820', '--text-mid': '#4A5848', '--text-light': '#7A887A',
+      '--border-light': '#D0DCD0',
+      '--hero-gradient-start': '#7AA07A', '--hero-gradient-mid': '#5A7A5A', '--hero-gradient-end': '#3A5A3A',
+      '--cta-gradient-start': '#5A7A5A', '--cta-gradient-end': '#7AA07A',
+      '--badge-bg': '#E4F0E4', '--badge-text': '#3A5A3A',
+      '--marquee-bg': '#B84040', '--marquee-text': '#FFF',
+      '--footer-bg': '#202820', '--footer-text': '#B8C8B8', '--footer-heading': '#E4F0E4',
+      '--product1-start': '#E4F0E4', '--product1-end': '#C0D8C0',
+      '--product2-start': '#FCE8E8', '--product2-end': '#F0C0C0',
+      '--product3-start': '#F0ECE4', '--product3-end': '#D8D0C0',
+      '--ing1-start': '#C0D8C0', '--ing1-end': '#98B898',
+      '--ing2-start': '#D09898', '--ing2-end': '#B87878',
+      '--ing3-start': '#E0D4C0', '--ing3-end': '#C8B8A0',
+      '--ing4-start': '#88A888', '--ing4-end': '#688868',
+    },
+    content: {
+      heroLabel: 'The season of giving',
+      heroHeading: 'Wrapped in<br>nature\'s warmth',
+      heroBody: 'Holiday gift sets, advent calendars, and limited edition winter botanicals. Thoughtfully made, beautifully wrapped.',
+      heroCta1: 'Shop holiday gifts',
+      heroCta2: 'Gift guide',
+      heroImgLabel: 'Hero image — evergreen, berries, gift wrapping, warm glow',
+      ingredientsHeading: 'Holiday botanicals',
+      productsHeading: 'Holiday collection',
+      ingName1: 'Fir needle', ingDetail1: 'Purifies + invigorates',
+      ingName2: 'Cranberry', ingDetail2: 'Antioxidant + brightens',
+      ingName3: 'Frankincense', ingDetail3: 'Regenerates + calms',
+      ingName4: 'Myrrh', ingDetail4: 'Heals + protects',
+      productName1: 'Evergreen ritual set', productDesc1: '12-day skincare advent',
+      productName2: 'Winter berry glow duo', productDesc2: 'Serum + oil gift box',
+      productName3: 'Frankincense night cream', productDesc3: 'Restorative luxury treatment',
+      productBadges1: ['Fir', 'Pine'], productBadges2: ['Cranberry', 'Rosehip'], productBadges3: ['Frankincense', 'Myrrh'],
+      quoteText: '"The most beautiful gift is one made with intention — for yourself or someone you love."',
+      ctaHeading: 'Give beautifully',
+      ctaBody: 'Holiday gift sets with complimentary wrapping and a handwritten note.',
+      marquee: 'Holiday gift guide is live &nbsp;&nbsp; · &nbsp;&nbsp; Free gift wrapping &nbsp;&nbsp; · &nbsp;&nbsp; Order by Dec 18 for delivery &nbsp;&nbsp; · &nbsp;&nbsp;',
+    },
+    particles: { type: 'snow', color: '#C8D8C8', count: 18 }
+  },
+
+  newyear: {
+    vars: {
+      '--primary': '#8A7A50', '--primary-light': '#C4B070', '--primary-lightest': '#FAF4E0',
+      '--primary-dark': '#6A5A38', '--primary-darkest': '#3A3020',
+      '--accent-warm': '#D4A840', '--accent-soft': '#E8D0A0', '--accent-earth': '#8A6A20',
+      '--bg-cream': '#FDFAF0', '--bg-white': '#FFFEFC',
+      '--text-dark': '#282420', '--text-mid': '#585038', '--text-light': '#908060',
+      '--border-light': '#E8DCC4',
+      '--hero-gradient-start': '#C4B070', '--hero-gradient-mid': '#8A7A50', '--hero-gradient-end': '#5A4A30',
+      '--cta-gradient-start': '#8A7A50', '--cta-gradient-end': '#C4B070',
+      '--badge-bg': '#FAF4E0', '--badge-text': '#6A5A38',
+      '--marquee-bg': '#C4B070', '--marquee-text': '#3A3020',
+      '--footer-bg': '#282420', '--footer-text': '#D0C4A8', '--footer-heading': '#FDFAF0',
+      '--product1-start': '#FAF4E0', '--product1-end': '#EAD8A8',
+      '--product2-start': '#FFF0C8', '--product2-end': '#E8D090',
+      '--product3-start': '#F0E8D0', '--product3-end': '#D8C8A0',
+      '--ing1-start': '#E8D498', '--ing1-end': '#D0B868',
+      '--ing2-start': '#D4A840', '--ing2-end': '#B88828',
+      '--ing3-start': '#C8B878', '--ing3-end': '#A89858',
+      '--ing4-start': '#B0A060', '--ing4-end': '#908040',
+    },
+    content: {
+      heroLabel: 'New year, new glow',
+      heroHeading: 'Start the year<br>skin-first',
+      heroBody: 'Reset your routine with our curated fresh-start bundles. Clean slate, clean ingredients, clean glow.',
+      heroCta1: 'Shop the reset',
+      heroImgLabel: 'Hero image — golden light, fresh start, champagne tones',
+      ingredientsHeading: 'Fresh start ingredients',
+      productsHeading: 'New year collection',
+      ingName1: 'Gold dust', ingDetail1: 'Illuminates + firms',
+      ingName2: 'Vitamin C', ingDetail2: 'Brightens + protects',
+      ingName3: 'Hyaluronic acid', ingDetail3: 'Plumps + hydrates',
+      ingName4: 'Retinol', ingDetail4: 'Renews + smooths',
+      productName1: 'Fresh start reset kit', productDesc1: 'Complete routine overhaul',
+      productName2: 'Golden glow serum', productDesc2: 'Illuminating treatment',
+      productName3: 'Resolution moisturizer', productDesc3: 'Daily commitment cream',
+      productBadges1: ['Vitamin C', 'Niacinamide'], productBadges2: ['Gold', 'Squalane'], productBadges3: ['Hyaluronic', 'Peptides'],
+      quoteText: '"The best resolution? Being kinder to your skin this year."',
+      ctaHeading: 'Your year starts here',
+      ctaBody: 'New year reset bundles — save 25% on curated routines.',
+      marquee: 'New year sale — 25% off bundles &nbsp;&nbsp; · &nbsp;&nbsp; Fresh start kits &nbsp;&nbsp; · &nbsp;&nbsp; Free shipping over $50 &nbsp;&nbsp; · &nbsp;&nbsp;',
+    },
+    particles: { type: 'sparkles', color: '#D4B868', count: 15 }
+  }
+};
+
+/* ——— AUTO-DETECT LOGIC ——— */
+function detectTheme() {
+  const now = new Date();
+  const month = now.getMonth(); // 0-indexed
+  const day = now.getDate();
+
+  // Holidays take priority (check within a window around each)
+  if (month === 11 && day >= 26 && day <= 31) return 'newyear';     // Dec 26–31
+  if (month === 0 && day >= 1 && day <= 7) return 'newyear';        // Jan 1–7
+  if (month === 1 && day >= 1 && day <= 14) return 'valentines';    // Feb 1–14
+  if (month === 4 && day >= 1 && day <= 12) return 'mothers-day';   // May 1–12 (2nd Sunday range)
+  if (month === 6 && day >= 1 && day <= 7) return 'july4th';        // Jul 1–7
+  if (month === 9 && day >= 15 && day <= 31) return 'halloween';    // Oct 15–31
+  if (month === 10 && day >= 18 && day <= 30) return 'thanksgiving';// Nov 18–30
+  if (month === 11 && day >= 1 && day <= 25) return 'christmas';    // Dec 1–25
+
+  // Seasons
+  if (month >= 2 && month <= 4) return 'spring';   // Mar–May
+  if (month >= 5 && month <= 7) return 'summer';    // Jun–Aug
+  if (month >= 8 && month <= 10) return 'fall';     // Sep–Nov
+  return 'winter';                                   // Dec–Feb
+}
+
+/* ——— APPLY THEME ——— */
+function applyTheme(themeKey) {
+  const isAuto = themeKey === 'auto';
+  const resolvedKey = isAuto ? detectTheme() : themeKey;
+  const theme = themes[resolvedKey];
+  if (!theme) return;
+
+  // Update auto badge
+  const badge = document.getElementById('autoBadge');
+  badge.textContent = isAuto ? `auto → ${resolvedKey}` : resolvedKey;
+  badge.style.background = isAuto ? 'rgba(163,177,138,0.3)' : 'rgba(255,255,255,0.1)';
+  badge.style.color = isAuto ? '#A3B18A' : '#888';
+
+  // Apply CSS vars
+  const root = document.documentElement;
+  for (const [prop, val] of Object.entries(theme.vars)) {
+    root.style.setProperty(prop, val);
+  }
+
+  // Apply content
+  const c = theme.content;
+  const set = (id, html) => { const el = document.getElementById(id); if (el) el.innerHTML = html; };
+
+  set('heroLabel', c.heroLabel);
+  set('heroHeading', c.heroHeading);
+  set('heroBody', c.heroBody);
+  set('heroCta1', c.heroCta1);
+  if (c.heroCta2) set('heroCta2', c.heroCta2);
+  set('heroImgLabel', c.heroImgLabel);
+  set('ingredientsHeading', c.ingredientsHeading);
+  set('productsHeading', c.productsHeading);
+
+  set('ingName1', c.ingName1); set('ingDetail1', c.ingDetail1);
+  set('ingName2', c.ingName2); set('ingDetail2', c.ingDetail2);
+  set('ingName3', c.ingName3); set('ingDetail3', c.ingDetail3);
+  set('ingName4', c.ingName4); set('ingDetail4', c.ingDetail4);
+
+  set('productName1', c.productName1); set('productDesc1', c.productDesc1);
+  set('productName2', c.productName2); set('productDesc2', c.productDesc2);
+  set('productName3', c.productName3); set('productDesc3', c.productDesc3);
+
+  if (c.productBadges1) set('productBadges1', c.productBadges1.map(b => `<span class="badge">${b}</span>`).join(''));
+  if (c.productBadges2) set('productBadges2', c.productBadges2.map(b => `<span class="badge">${b}</span>`).join(''));
+  if (c.productBadges3) set('productBadges3', c.productBadges3.map(b => `<span class="badge">${b}</span>`).join(''));
+
+  set('quoteText', c.quoteText);
+  set('ctaHeading', c.ctaHeading);
+  set('ctaBody', c.ctaBody);
+
+  // Update marquee
+  const marqueeEl = document.getElementById('marqueeContent');
+  if (marqueeEl && c.marquee) {
+    marqueeEl.innerHTML = `<span>${c.marquee.repeat(4)}</span>`;
+  }
+
+  // Particles
+  renderParticles(theme.particles);
+}
+
+/* ——— PARTICLE EFFECTS ——— */
+function renderParticles(config) {
+  const container = document.getElementById('seasonalDeco');
+  container.innerHTML = '';
+  if (!config || !config.count) return;
+
+  for (let i = 0; i < config.count; i++) {
+    const el = document.createElement('div');
+    el.className = 'particle';
+    el.style.left = Math.random() * 100 + '%';
+    el.style.animationDuration = (8 + Math.random() * 12) + 's';
+    el.style.animationDelay = (Math.random() * 10) + 's';
+    el.style.fontSize = (10 + Math.random() * 14) + 'px';
+    el.style.color = config.color;
+
+    switch (config.type) {
+      case 'snow':
+        el.textContent = '●';
+        el.style.fontSize = (4 + Math.random() * 8) + 'px';
+        el.style.opacity = 0.4 + Math.random() * 0.3;
+        break;
+      case 'petals':
+        el.textContent = '✿';
+        break;
+      case 'leaves':
+        el.textContent = '🍂';
+        el.style.fontSize = (14 + Math.random() * 10) + 'px';
+        break;
+      case 'hearts':
+        el.textContent = '♥';
+        break;
+      case 'sparkles':
+        el.textContent = '✦';
+        el.style.fontSize = (8 + Math.random() * 10) + 'px';
+        break;
+      default:
+        el.textContent = '·';
+    }
+    container.appendChild(el);
+  }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  applyTheme('auto');
+});
+</script>
+
+</body>
+</html>
